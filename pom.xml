@@ -22,7 +22,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.pixplaze.Main</mainClass>
+                            <mainClass>com.pixplaze.warcell.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

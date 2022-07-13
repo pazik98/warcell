@@ -1,15 +1,10 @@
-package com.pixplaze.entity;
+package com.pixplaze.warcell.entity;
 
-import com.pixplaze.entity.behaviour.IMovable;
-import com.pixplaze.entity.behaviour.IProgrammable;
-import com.pixplaze.entity.behaviour.IUnitCommand;
-import com.pixplaze.entity.behaviour.MoveCommand;
-import com.pixplaze.world.FacingType;
-import com.pixplaze.world.Position;
+import com.pixplaze.warcell.entity.behaviour.*;
+import com.pixplaze.warcell.world.FacingType;
+import com.pixplaze.warcell.world.Position;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 public class Unit extends Entity implements IProgrammable, IMovable {
@@ -90,10 +85,14 @@ public class Unit extends Entity implements IProgrammable, IMovable {
     }
 
     public void initCommands() {
-        MoveCommand moveCommand = new MoveCommand<Unit>(this);
+        MoveCommand<Unit> moveCommand = new MoveCommand<>(this);
+        TurnLeftCommand<Unit> turnLeftCommand = new TurnLeftCommand<>(this);
+        TurnRightCommand<Unit> turnRightCommand = new TurnRightCommand<>(this);
+        commandQueue.add(turnRightCommand);
         commandQueue.add(moveCommand);
         commandQueue.add(moveCommand);
         commandQueue.add(moveCommand);
+        commandQueue.add(turnLeftCommand);
         commandQueue.add(moveCommand);
         commandQueue.add(moveCommand);
     }

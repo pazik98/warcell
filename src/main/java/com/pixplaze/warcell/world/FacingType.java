@@ -1,4 +1,4 @@
-package com.pixplaze.world;
+package com.pixplaze.warcell.world;
 
 public enum FacingType {
     NORTH,

@@ -1,4 +1,4 @@
-package com.pixplaze.entity.behaviour;
+package com.pixplaze.warcell.entity.behaviour;
 
 public interface IMovable {
 

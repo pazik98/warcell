@@ -1,9 +1,10 @@
-package com.pixplaze.world;
+package com.pixplaze.warcell.world;
 
-import com.pixplaze.entity.Unit;
-import com.pixplaze.entity.types.Empty;
-import com.pixplaze.entity.Entity;
-import com.pixplaze.entity.types.Wall;
+import com.pixplaze.warcell.entity.Unit;
+import com.pixplaze.warcell.entity.behaviour.IProgrammable;
+import com.pixplaze.warcell.entity.types.Empty;
+import com.pixplaze.warcell.entity.Entity;
+import com.pixplaze.warcell.entity.types.Wall;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,15 +17,20 @@ public class World {
     public World(int sizeX, int sizeY) {
         this.map = new Map(sizeX, sizeY);
         this.objects = new ArrayList<>();
-
-        for (int i = 0; i < map.getSizeX(); i++) {
-            for (int j = 0; j < map.getSizeY(); j++) {
-                spawnEntity(i, j, new Empty());
-            }
-        }
+        clearMap();
     }
 
     public void spawnEntity(int x, int y, Entity entity) {
+        if (!isEmpty(x, y)) {
+            System.out.printf("Cannot spawn entity at %d %d!", x, y);
+            return;
+        }
+
+        if (objects.contains(entity)) {
+            System.out.println("Entity already spawned at this world!");
+            return;
+        }
+
         map.setEntityAtCell(x, y, entity);
         objects.add(entity);
         entity.setWorld(this);
@@ -44,16 +50,30 @@ public class World {
         return getEntity(x, y) instanceof Empty;
     }
 
-    public void updateMap() {
+    public void clearMap() {
         for (int i = 0; i < map.getSizeX(); i++) {
             for (int j = 0; j < map.getSizeY(); j++) {
                 map.setEntityAtCell(i, j, new Empty());
             }
         }
+    }
 
-        for (int i = 0; i < objects.size(); i++) {
-            Entity object = objects.get(i);
+    public void updateMap() {
+        clearMap();
+        for (Entity object : objects) {
             map.setEntityAtCell(object.getPosition().getX(), object.getPosition().getY(), object);
+        }
+    }
+
+    public Map getMap() {
+        return map;
+    }
+
+    public void updateObjects() {
+        for (Entity entity : objects) {
+            if (entity instanceof IProgrammable) {
+                ((IProgrammable) entity).executeActualCommand();
+            }
         }
     }
 

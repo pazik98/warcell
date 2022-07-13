@@ -1,7 +1,6 @@
-package com.pixplaze.world;
+package com.pixplaze.warcell.world;
 
-import com.pixplaze.entity.Entity;
-import com.pixplaze.entity.types.Empty;
+import com.pixplaze.warcell.entity.Entity;
 
 public class Map {
 

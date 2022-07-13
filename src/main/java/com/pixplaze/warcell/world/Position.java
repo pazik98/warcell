@@ -1,4 +1,6 @@
-package com.pixplaze.world;
+package com.pixplaze.warcell.world;
+
+import java.util.Objects;
 
 public class Position {
 
@@ -62,5 +64,18 @@ public class Position {
 
     public void toLeft() {
         x--;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Position position = (Position) o;
+        return x == position.x && y == position.y && facing == position.facing;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y, facing);
     }
 }
