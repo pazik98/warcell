@@ -1,18 +1,21 @@
 package com.pixplaze.warcell.gui;
 
+import com.pixplaze.warcell.ResourceManager;
 import com.pixplaze.warcell.world.Map;
 import com.pixplaze.warcell.world.World;
+import org.imgscalr.Scalr;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class MapPanel extends JPanel {
 
+    private static final ResourceManager resourceManager = ResourceManager.getInstance();
+
     public static BufferedImage emptyCellImage;
+
+    private static final int DEFAULT_TILE_SIZE = 20;
 
     private float zoom = 1.0f;
     private float xCenter = 0.0f;
@@ -24,6 +27,8 @@ public class MapPanel extends JPanel {
         this.world = world;
         this.setBackground(Color.BLACK);
         this.setPreferredSize(new Dimension(400, 400));
+
+        initImages();
     }
 
     public float getZoom() {
@@ -54,26 +59,30 @@ public class MapPanel extends JPanel {
         return world;
     }
 
+    private int getTileSize() {
+        return Math.round(DEFAULT_TILE_SIZE * zoom);
+    }
+
     private void drawCell(Graphics2D g, int x, int y, int size, BufferedImage image) {
-        //BufferedImage sizedImage = new BufferedImage(size, size, image);
         g.drawImage(image, x, y, null);
     }
 
     private void drawField(Graphics2D g) {
         Map map = world.getMap();
-        int tileSize = Math.round(50 * zoom);
+        int tileSize = getTileSize();
+        BufferedImage fieldTile = Scalr.resize(emptyCellImage, tileSize);
 
         for (int x = 0; x < map.getSizeX(); x++) {
             for (int y = 0; y < map.getSizeY(); y++) {
-                int xPos = x + x * tileSize;
-                int yPos = y + y * tileSize;
-                drawCell(g, xPos, yPos, tileSize, emptyCellImage);
+                int xPos = Math.round(x * tileSize * zoom);
+                int yPos = Math.round(y * tileSize * zoom);
+                drawCell(g, xPos, yPos, tileSize, fieldTile);
             }
         }
     }
 
-    private void initImages() throws IOException {
-        emptyCellImage = ImageIO.read(new File("img/dirt-0.jpg"));
+    private void initImages() {
+        emptyCellImage = resourceManager.loadImage("dirt-0.jpg");
     }
 
     @Override

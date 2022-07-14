@@ -8,9 +8,11 @@ import com.pixplaze.warcell.world.World;
 
 public class Main {
     public static void main(String[] args) {
+        ResourceManager recourceManager = new ResourceManager();
+
         ClientWindow clientWindow = new ClientWindow();
 
-        World world = new World(10, 10);
+        World world = new World(40, 40);
         Simulation simulation = new Simulation(world);
 
         world.spawnEntity(2, 3, new Wall());
@@ -23,7 +25,7 @@ public class Main {
         world.spawnEntity(1, 1, unit2);
         world.spawnEntity(5, 5, unit2);
 
-        clientWindow.initMapPanel(world);
+        clientWindow.initGamePanel(world);
         clientWindow.run();
 
         simulation.start(10);

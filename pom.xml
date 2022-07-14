@@ -15,19 +15,45 @@
 
     <build>
         <plugins>
+            <!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.0</version>
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.pixplaze.warcell.Main</mainClass>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>com.pixplaze.warcell.Main </mainClass>
                         </manifest>
                     </archive>
                 </configuration>
             </plugin>
+            -->
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>com.pixplaze.warcell.Main </mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.imgscalr</groupId>
+            <artifactId>imgscalr-lib</artifactId>
+            <version>4.2</version>
+        </dependency>
+    </dependencies>
 
 </project>
