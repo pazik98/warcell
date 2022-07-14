@@ -12,7 +12,7 @@ public class Main {
 
         ClientWindow clientWindow = new ClientWindow();
 
-        World world = new World(40, 40);
+        World world = new World(20, 20);
         Simulation simulation = new Simulation(world);
 
         world.spawnEntity(2, 3, new Wall());

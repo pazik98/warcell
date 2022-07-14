@@ -8,23 +8,20 @@ import java.awt.*;
 
 public class ClientWindow extends JFrame implements Runnable {
 
-    private GamePanel mainPanel;
-    private MapPanel mapPanel;
-    private JPanel infoPanel;
-
     public ClientWindow() throws HeadlessException {
         System.out.println("Creating window");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setResizable(true);
-        this.setTitle("WarCell v1.0");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(true);
+        setTitle("WarCell v1.0");
 
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     public void initGamePanel(World world) {
-        mainPanel = new GamePanel(800, 600);
-        mapPanel = new MapPanel(world);
+        GamePanel mainPanel = new GamePanel(800, 600);
+        MapPanel mapPanel = new MapPanel(world);
+        addKeyListener(new KeyboardListener(mapPanel));
         mainPanel.add(mapPanel);
         this.add(mainPanel);
         this.pack();

@@ -25,9 +25,8 @@ public class MapPanel extends JPanel {
 
     public MapPanel(World world) {
         this.world = world;
-        this.setBackground(Color.BLACK);
-        this.setPreferredSize(new Dimension(400, 400));
-
+        setBackground(Color.BLACK);
+        setPreferredSize(new Dimension(400, 400));
         initImages();
     }
 
@@ -43,7 +42,7 @@ public class MapPanel extends JPanel {
         return xCenter;
     }
 
-    public void setxCenter(float xCenter) {
+    private void setxCenter(float xCenter) {
         this.xCenter = xCenter;
     }
 
@@ -51,8 +50,16 @@ public class MapPanel extends JPanel {
         return yCenter;
     }
 
-    public void setyCenter(float yCenter) {
+    private void setyCenter(float yCenter) {
         this.yCenter = yCenter;
+    }
+
+    public void moveCameraX(float offset) {
+        xCenter -= offset;
+    }
+
+    public void moveCameraY(float offset) {
+        yCenter += offset;
     }
 
     public World getWorld() {
@@ -63,7 +70,11 @@ public class MapPanel extends JPanel {
         return Math.round(DEFAULT_TILE_SIZE * zoom);
     }
 
-    private void drawCell(Graphics2D g, int x, int y, int size, BufferedImage image) {
+    public int getMoveOffset() {
+        return getTileSize();
+    }
+
+    private void drawCell(Graphics2D g, int x, int y, BufferedImage image) {
         g.drawImage(image, x, y, null);
     }
 
@@ -74,9 +85,9 @@ public class MapPanel extends JPanel {
 
         for (int x = 0; x < map.getSizeX(); x++) {
             for (int y = 0; y < map.getSizeY(); y++) {
-                int xPos = Math.round(x * tileSize * zoom);
-                int yPos = Math.round(y * tileSize * zoom);
-                drawCell(g, xPos, yPos, tileSize, fieldTile);
+                int xPos = Math.round(x * tileSize * zoom + xCenter);
+                int yPos = Math.round(y * tileSize * zoom + yCenter);
+                drawCell(g, xPos, yPos, fieldTile);
             }
         }
     }
