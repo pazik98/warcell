@@ -50,10 +50,14 @@ public class World {
         return getEntity(x, y) instanceof Empty;
     }
 
+    public void clearCell(int x, int y) {
+        map.setEntityAtCell(x, y, new Empty());
+    }
+
     public void clearMap() {
         for (int i = 0; i < map.getSizeX(); i++) {
             for (int j = 0; j < map.getSizeY(); j++) {
-                map.setEntityAtCell(i, j, new Empty());
+                clearCell(i, j);
             }
         }
     }

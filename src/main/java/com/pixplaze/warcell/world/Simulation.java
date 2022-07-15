@@ -4,6 +4,7 @@ public class Simulation {
 
     private int step = 0;
     private final World world;
+    private int latency = 1000/2;
 
     public Simulation(World world) {
         this.world = world;
@@ -17,6 +18,11 @@ public class Simulation {
 
     public void start() {
         while (true) {
+            try {
+                Thread.sleep(latency);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             nextStep();
         }
     }

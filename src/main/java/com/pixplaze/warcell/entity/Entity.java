@@ -21,7 +21,7 @@ public class Entity {
     }
 
     public Entity(String name) {
-        name = name;
+        this.name = name;
         position = new Position();
         setTexture(getDefaultTexture());
     }
