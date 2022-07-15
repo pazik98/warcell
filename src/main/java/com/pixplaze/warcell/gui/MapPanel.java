@@ -21,8 +21,8 @@ public class MapPanel extends JPanel {
     private static final int DEFAULT_TILE_SIZE = 20;
 
     private float zoom = 1.0f;
-    private float xCenter = 0.0f;
-    private float yCenter = 0.0f;
+    private float xCenter = 200.0f;
+    private float yCenter = 400.0f;
 
     private final World world;
 
@@ -78,7 +78,7 @@ public class MapPanel extends JPanel {
 
     private void drawAtCell(Graphics2D g, int x, int y, int tileSize, BufferedImage image) {
         int xPos = Math.round(x * tileSize * zoom + xCenter);
-        int yPos = Math.round(y * tileSize * zoom + yCenter);
+        int yPos = Math.round(-y * tileSize * zoom + yCenter);
         g.drawImage(image, xPos, yPos, null);
     }
 
