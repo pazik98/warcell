@@ -8,22 +8,22 @@ import java.awt.*;
 public class GamePanel extends JPanel {
 
     public GamePanel(World world) {
-        this.setPreferredSize(new Dimension(800, 600));
+        setPreferredSize(new Dimension(800, 600));
         initOptions();
     }
 
     public GamePanel(int width, int height) {
-        this.setPreferredSize(new Dimension(width, height));
+        setPreferredSize(new Dimension(width, height));
         initOptions();
     }
 
     public void initOptions() {
-        this.setBackground(Color.WHITE);
-        this.setDoubleBuffered(true);
-        this.setLayout(new BorderLayout());
+        setBackground(Color.WHITE);
+        setDoubleBuffered(true);
+        setLayout(new BorderLayout());
     }
 
     public void initMapPanel(World world) {
-        this.add(new MapPanel(world));
+        add(new MapPanel(world));
     }
 }

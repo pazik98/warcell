@@ -23,19 +23,19 @@ public class ClientWindow extends JFrame implements Runnable {
         MapPanel mapPanel = new MapPanel(world);
         addKeyListener(new KeyboardListener(mapPanel));
         mainPanel.add(mapPanel);
-        this.add(mainPanel);
-        this.pack();
+        add(mainPanel);
+        pack();
     }
 
     @Override
     public void run() {
         System.out.println("Running GUI window...");
         while (true) {
-//            try {
-//                Thread.sleep(1000/60);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
+            try {
+                Thread.sleep(1000/60);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             repaint();
         }
     }

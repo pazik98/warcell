@@ -77,6 +77,10 @@ public class World {
         }
     }
 
+    public List<Entity> getObjects() {
+        return new ArrayList<>(objects);
+    }
+
     @Override
     public String toString() {
         String world = "";

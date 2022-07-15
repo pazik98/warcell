@@ -3,13 +3,12 @@ package com.pixplaze.warcell;
 import com.pixplaze.warcell.entity.Unit;
 import com.pixplaze.warcell.entity.types.Wall;
 import com.pixplaze.warcell.gui.ClientWindow;
+import com.pixplaze.warcell.world.FacingType;
 import com.pixplaze.warcell.world.Simulation;
 import com.pixplaze.warcell.world.World;
 
 public class Main {
     public static void main(String[] args) {
-        ResourceManager recourceManager = new ResourceManager();
-
         ClientWindow clientWindow = new ClientWindow();
 
         World world = new World(20, 20);
@@ -25,11 +24,15 @@ public class Main {
         world.spawnEntity(1, 1, unit2);
         world.spawnEntity(5, 5, unit2);
 
+        Unit unit3 = new Unit();
+        world.spawnEntity(9, 9, unit3);
+        unit3.getPosition().setFacing(FacingType.EAST);
+
         clientWindow.initGamePanel(world);
-        clientWindow.run();
+
+        Thread thread = new Thread(clientWindow);
+        thread.start();
 
         simulation.start(10);
-
-        System.out.println(world);
     }
 }

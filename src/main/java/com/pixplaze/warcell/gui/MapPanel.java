@@ -1,7 +1,10 @@
 package com.pixplaze.warcell.gui;
 
 import com.pixplaze.warcell.ResourceManager;
+import com.pixplaze.warcell.entity.Entity;
+import com.pixplaze.warcell.entity.types.Wall;
 import com.pixplaze.warcell.world.Map;
+import com.pixplaze.warcell.world.Position;
 import com.pixplaze.warcell.world.World;
 import org.imgscalr.Scalr;
 
@@ -13,7 +16,9 @@ public class MapPanel extends JPanel {
 
     private static final ResourceManager resourceManager = ResourceManager.getInstance();
 
-    public static BufferedImage emptyCellImage;
+    private static BufferedImage emptyCellImage;
+    private static BufferedImage unitImage;
+    private static BufferedImage wallImage;
 
     private static final int DEFAULT_TILE_SIZE = 20;
 
@@ -74,8 +79,10 @@ public class MapPanel extends JPanel {
         return getTileSize();
     }
 
-    private void drawCell(Graphics2D g, int x, int y, BufferedImage image) {
-        g.drawImage(image, x, y, null);
+    private void drawAtCell(Graphics2D g, int x, int y, int tileSize, BufferedImage image) {
+        int xPos = Math.round(x * tileSize * zoom + xCenter);
+        int yPos = Math.round(y * tileSize * zoom + yCenter);
+        g.drawImage(image, xPos, yPos, null);
     }
 
     private void drawField(Graphics2D g) {
@@ -85,15 +92,38 @@ public class MapPanel extends JPanel {
 
         for (int x = 0; x < map.getSizeX(); x++) {
             for (int y = 0; y < map.getSizeY(); y++) {
-                int xPos = Math.round(x * tileSize * zoom + xCenter);
-                int yPos = Math.round(y * tileSize * zoom + yCenter);
-                drawCell(g, xPos, yPos, fieldTile);
+                drawAtCell(g, x, y, tileSize, fieldTile);
             }
         }
     }
 
+    private void drawEntities(Graphics2D g) {
+        int tileSize = getTileSize();
+        BufferedImage entityTile;
+        BufferedImage unitTile = Scalr.resize(unitImage, tileSize);
+        BufferedImage wallTile = Scalr.resize(wallImage, tileSize);
+
+        for (Entity entity : world.getObjects()) {
+            if (entity instanceof Wall) {
+                entityTile = wallTile;
+            } else {
+                entityTile = unitTile;
+            }
+
+            Position p = entity.getPosition();
+            switch (p.getFacing()) {
+                case NORTH -> entityTile = Scalr.rotate(entityTile, Scalr.Rotation.CW_180);
+                case EAST -> entityTile = Scalr.rotate(entityTile, Scalr.Rotation.CW_270);
+                case WEST -> entityTile = Scalr.rotate(entityTile, Scalr.Rotation.CW_90);
+            }
+            drawAtCell(g, p.getX(), p.getY(), tileSize, entityTile);
+        }
+    }
+
     private void initImages() {
-        emptyCellImage = resourceManager.loadImage("dirt-0.jpg");
+        emptyCellImage = resourceManager.loadImage("dirt.jpg");
+        unitImage = resourceManager.loadImage("unit.jpg");
+        wallImage = resourceManager.loadImage("wall.jpg");
     }
 
     @Override
@@ -101,5 +131,6 @@ public class MapPanel extends JPanel {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         drawField(g2);
+        drawEntities(g2);
     }
 }
