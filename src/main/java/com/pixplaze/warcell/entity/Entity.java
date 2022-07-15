@@ -1,8 +1,10 @@
 package com.pixplaze.warcell.entity;
 
+import com.pixplaze.warcell.util.ResourceManager;
 import com.pixplaze.warcell.world.Position;
 import com.pixplaze.warcell.world.World;
 
+import java.awt.image.BufferedImage;
 import java.util.Objects;
 
 public class Entity {
@@ -10,10 +12,18 @@ public class Entity {
     private String name;
     private Position position;
     private World world;
+    private BufferedImage texture;
+
+    public Entity() {
+        name = "Entity";
+        position = new Position();
+        setTexture(getDefaultTexture());
+    }
 
     public Entity(String name) {
-        this.name = name;
-        this.position = new Position();
+        name = name;
+        position = new Position();
+        setTexture(getDefaultTexture());
     }
 
     public String getName() {
@@ -38,6 +48,19 @@ public class Entity {
 
     public void setWorld(World world) {
         this.world = world;
+    }
+
+    public void setTexture(BufferedImage texture) {
+        this.texture = texture;
+    }
+
+    public BufferedImage getTexture() {
+        return texture;
+    }
+
+    public BufferedImage getDefaultTexture() {
+        String path = "/entities/unit.jpg";
+        return ResourceManager.getInstance().loadTexture(path);
     }
 
     @Override

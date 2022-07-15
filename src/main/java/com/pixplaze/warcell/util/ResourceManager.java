@@ -1,4 +1,4 @@
-package com.pixplaze.warcell;
+package com.pixplaze.warcell.util;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -9,7 +9,7 @@ public class ResourceManager {
 
     private static ResourceManager instance;
 
-    private String absolutePath = new File("").getAbsolutePath();
+    private final String absolutePath = new File("").getAbsolutePath();
 
     public static ResourceManager getInstance() {
         if (instance == null) {
@@ -18,8 +18,8 @@ public class ResourceManager {
         return instance;
     }
 
-    public BufferedImage loadImage(String fileName) {
-        File imageFile = new File(absolutePath + "\\src\\main\\resources\\images\\" + fileName);
+    public BufferedImage loadTexture(String fileName) {
+        File imageFile = new File(absolutePath + "\\src\\main\\resources\\textures\\" + fileName);
         BufferedImage image = new BufferedImage(1, 1, 1);
         try {
             image = ImageIO.read(imageFile);

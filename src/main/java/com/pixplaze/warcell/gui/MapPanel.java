@@ -1,6 +1,6 @@
 package com.pixplaze.warcell.gui;
 
-import com.pixplaze.warcell.ResourceManager;
+import com.pixplaze.warcell.util.ResourceManager;
 import com.pixplaze.warcell.entity.Entity;
 import com.pixplaze.warcell.entity.types.Wall;
 import com.pixplaze.warcell.world.Map;
@@ -16,9 +16,7 @@ public class MapPanel extends JPanel {
 
     private static final ResourceManager resourceManager = ResourceManager.getInstance();
 
-    private static BufferedImage emptyCellImage;
-    private static BufferedImage unitImage;
-    private static BufferedImage wallImage;
+    private static BufferedImage emptyCellImage = resourceManager.loadTexture("dirt.jpg");
 
     private static final int DEFAULT_TILE_SIZE = 20;
 
@@ -32,7 +30,6 @@ public class MapPanel extends JPanel {
         this.world = world;
         setBackground(Color.BLACK);
         setPreferredSize(new Dimension(400, 400));
-        initImages();
     }
 
     public float getZoom() {
@@ -99,18 +96,9 @@ public class MapPanel extends JPanel {
 
     private void drawEntities(Graphics2D g) {
         int tileSize = getTileSize();
-        BufferedImage entityTile;
-        BufferedImage unitTile = Scalr.resize(unitImage, tileSize);
-        BufferedImage wallTile = Scalr.resize(wallImage, tileSize);
-
         for (Entity entity : world.getObjects()) {
-            if (entity instanceof Wall) {
-                entityTile = wallTile;
-            } else {
-                entityTile = unitTile;
-            }
-
             Position p = entity.getPosition();
+            BufferedImage entityTile = Scalr.resize(entity.getDefaultTexture(), tileSize);
             switch (p.getFacing()) {
                 case NORTH -> entityTile = Scalr.rotate(entityTile, Scalr.Rotation.CW_180);
                 case EAST -> entityTile = Scalr.rotate(entityTile, Scalr.Rotation.CW_270);
@@ -118,12 +106,6 @@ public class MapPanel extends JPanel {
             }
             drawAtCell(g, p.getX(), p.getY(), tileSize, entityTile);
         }
-    }
-
-    private void initImages() {
-        emptyCellImage = resourceManager.loadImage("dirt.jpg");
-        unitImage = resourceManager.loadImage("unit.jpg");
-        wallImage = resourceManager.loadImage("wall.jpg");
     }
 
     @Override
