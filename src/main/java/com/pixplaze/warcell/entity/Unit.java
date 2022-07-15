@@ -3,7 +3,9 @@ package com.pixplaze.warcell.entity;
 import com.pixplaze.warcell.entity.behaviour.*;
 import com.pixplaze.warcell.util.ResourceManager;
 import com.pixplaze.warcell.world.FacingType;
+import com.pixplaze.warcell.world.Map;
 import com.pixplaze.warcell.world.Position;
+import com.pixplaze.warcell.world.World;
 
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
@@ -19,54 +21,62 @@ public class Unit extends Entity implements IProgrammable, IMovable {
     }
 
     public void move() {
-        Position pos = getPosition();
-        FacingType facing = pos.getFacing();
+        Position p = getPosition();
+        FacingType facing = p.getFacing();
+        World w = getWorld();
 
         switch (facing) {
             case NORTH:
-                if (getWorld().isEmpty(pos.getX(), pos.getY() + 1)) {
-                    pos.toUp();
+                if (w.isEmpty(p.getX(), p.getY() + 1)) {
+                    w.clearCell(p.getX(), p.getY());
+                    p.toUp();
+                    w.getMap().setEntityAtCell(p.getX(), p.getY(), this);
                 }
                 break;
             case EAST:
-                if (getWorld().isEmpty(pos.getX() + 1, pos.getY())) {
-                    pos.toRight();
+                if (w.isEmpty(p.getX() + 1, p.getY())) {
+                    w.clearCell(p.getX(), p.getY());
+                    p.toRight();
+                    w.getMap().setEntityAtCell(p.getX(), p.getY(), this);
                 }
                 break;
             case SOUTH:
-                if (getWorld().isEmpty(pos.getX(), pos.getY() - 1)) {
-                    pos.toDown();
+                if (w.isEmpty(p.getX(), p.getY() - 1)) {
+                    w.clearCell(p.getX(), p.getY());
+                    p.toDown();
+                    w.getMap().setEntityAtCell(p.getX(), p.getY(), this);
                 }
                 break;
             case WEST:
-                if (getWorld().isEmpty(pos.getX() - 1, pos.getY())) {
-                    pos.toLeft();
+                if (w.isEmpty(p.getX() - 1, p.getY())) {
+                    w.clearCell(p.getX(), p.getY());
+                    p.toLeft();
+                    w.getMap().setEntityAtCell(p.getX(), p.getY(), this);
                 }
-                break;
         }
     }
 
     public void turnLeft() {
-        Position pos = getPosition();
-        FacingType facing = pos.getFacing();
+        Position p = getPosition();
+        FacingType facing = p.getFacing();
 
         switch (facing) {
-            case NORTH -> pos.setFacing(FacingType.WEST);
-            case EAST -> pos.setFacing(FacingType.NORTH);
-            case SOUTH -> pos.setFacing(FacingType.EAST);
-            case WEST -> pos.setFacing(FacingType.SOUTH);
+            case NORTH -> p.setFacing(FacingType.WEST);
+            case EAST -> p.setFacing(FacingType.NORTH);
+            case SOUTH -> p.setFacing(FacingType.EAST);
+            case WEST -> p.setFacing(FacingType.SOUTH);
         }
     }
 
     public void turnRight() {
-        Position pos = getPosition();
-        FacingType facing = pos.getFacing();
+        Position p = getPosition();
+        FacingType facing = p.getFacing();
 
         switch (facing) {
-            case NORTH -> pos.setFacing(FacingType.EAST);
-            case EAST -> pos.setFacing(FacingType.SOUTH);
-            case SOUTH -> pos.setFacing(FacingType.WEST);
-            case WEST -> pos.setFacing(FacingType.NORTH);
+            case NORTH -> p.setFacing(FacingType.EAST);
+            case EAST -> p.setFacing(FacingType.SOUTH);
+            case SOUTH -> p.setFacing(FacingType.WEST);
+            case WEST -> p.setFacing(FacingType.NORTH);
         }
     }
 
@@ -78,11 +88,9 @@ public class Unit extends Entity implements IProgrammable, IMovable {
     @Override
     public void executeActualCommand() {
         IUnitCommand command = commandQueue.poll();
-        if (command == null) {
-            //System.out.println("No commands to execute!");
-        } else {
-            command.execute();
-        }
+        assert command != null;
+        command.execute();
+        commandQueue.add(command);
     }
 
     public void initCommands() {
@@ -91,6 +99,9 @@ public class Unit extends Entity implements IProgrammable, IMovable {
         TurnRightCommand<Unit> turnRightCommand = new TurnRightCommand<>(this);
         commandQueue.add(turnRightCommand);
         commandQueue.add(moveCommand);
+        commandQueue.add(moveCommand);
+        commandQueue.add(moveCommand);
+        commandQueue.add(turnLeftCommand);
         commandQueue.add(moveCommand);
         commandQueue.add(moveCommand);
         commandQueue.add(turnLeftCommand);
