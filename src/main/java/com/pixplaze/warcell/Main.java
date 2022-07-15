@@ -30,9 +30,10 @@ public class Main {
 
         clientWindow.initGamePanel(world);
 
-        Thread thread = new Thread(clientWindow);
-        thread.start();
+        Runnable renderWindow = clientWindow::start;
+        new Thread(renderWindow).start();
 
-        simulation.start(10);
+        Runnable calculateSimulation = simulation::start;
+        new Thread(calculateSimulation).start();
     }
 }

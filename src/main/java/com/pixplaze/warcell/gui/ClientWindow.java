@@ -6,7 +6,7 @@ import com.pixplaze.warcell.world.World;
 import javax.swing.*;
 import java.awt.*;
 
-public class ClientWindow extends JFrame implements Runnable {
+public class ClientWindow extends JFrame {
 
     public ClientWindow() throws HeadlessException {
         System.out.println("Creating window");
@@ -27,8 +27,7 @@ public class ClientWindow extends JFrame implements Runnable {
         pack();
     }
 
-    @Override
-    public void run() {
+    public void start() {
         System.out.println("Running GUI window...");
         while (true) {
             try {

@@ -79,7 +79,7 @@ public class Unit extends Entity implements IProgrammable, IMovable {
     public void executeActualCommand() {
         IUnitCommand command = commandQueue.poll();
         if (command == null) {
-            System.out.println("No commands to execute!");
+            //System.out.println("No commands to execute!");
         } else {
             command.execute();
         }
