@@ -1,11 +1,16 @@
 package com.pixplaze.warcell.gui;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyboardListener implements KeyListener {
 
     private MapPanel mapPanel;
+    static final Logger rootLogger = LogManager.getRootLogger();
 
     public KeyboardListener(MapPanel mapPanel) {
         this.mapPanel = mapPanel;
@@ -22,19 +27,19 @@ public class KeyboardListener implements KeyListener {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
                 mapPanel.moveCameraY(offset);
-                System.out.println("UP PRESSED");
+                rootLogger.log(Level.DEBUG, "Up key pressed");
                 break;
             case KeyEvent.VK_DOWN:
                 mapPanel.moveCameraY(-offset);
-                System.out.println("DOWN PRESSED");
+                rootLogger.log(Level.DEBUG, "Down key pressed");
                 break;
             case KeyEvent.VK_RIGHT:
                 mapPanel.moveCameraX(offset);
-                System.out.println("RIGHT PRESSED");
+                rootLogger.log(Level.DEBUG, "Right key pressed");
                 break;
             case KeyEvent.VK_LEFT:
                 mapPanel.moveCameraX(-offset);
-                System.out.println("LEFT PRESSED");
+                rootLogger.log(Level.DEBUG, "Left key pressed");
                 break;
         }
     }

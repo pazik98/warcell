@@ -5,6 +5,8 @@ import com.pixplaze.warcell.entity.behaviour.IProgrammable;
 import com.pixplaze.warcell.entity.types.Empty;
 import com.pixplaze.warcell.entity.Entity;
 import com.pixplaze.warcell.entity.types.Wall;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,8 @@ public class World {
     private Map map;
     private List<Entity> objects;
 
+    static final Logger rootLogger = LogManager.getRootLogger();
+
     public World(int sizeX, int sizeY) {
         this.map = new Map(sizeX, sizeY);
         this.objects = new ArrayList<>();
@@ -22,12 +26,12 @@ public class World {
 
     public void spawnEntity(int x, int y, Entity entity) {
         if (!isEmpty(x, y)) {
-            System.out.printf("Cannot spawn entity at %d %d!", x, y);
+            rootLogger.warn("Cannot spawn entity at [" + x + ", " + y);
             return;
         }
 
         if (objects.contains(entity)) {
-            System.out.println("Entity already spawned at this world!");
+            rootLogger.warn("Entity already spawned at this world!");
             return;
         }
 
@@ -39,7 +43,7 @@ public class World {
     }
 
     public Entity getEntity(int x, int y) {
-        System.out.printf("Entity at cell %d %d is %s\n", x, y, map.getEntityAtCell(x, y));
+        rootLogger.debug("Entity at cell [" + x + ", " + y + "] is " + map.getEntityAtCell(x, y));
         return map.getEntityAtCell(x, y);
     }
 

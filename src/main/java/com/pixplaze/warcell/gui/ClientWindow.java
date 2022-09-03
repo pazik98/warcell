@@ -1,15 +1,19 @@
 package com.pixplaze.warcell.gui;
 
-import com.pixplaze.warcell.world.FacingType;
 import com.pixplaze.warcell.world.World;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class ClientWindow extends JFrame {
 
+    static final Logger rootLogger = LogManager.getRootLogger();
+
     public ClientWindow() throws HeadlessException {
-        System.out.println("Creating window");
+        rootLogger.log(Level.DEBUG, "Creating window");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(true);
         setTitle("WarCell v1.0");
@@ -28,7 +32,7 @@ public class ClientWindow extends JFrame {
     }
 
     public void start() {
-        System.out.println("Running GUI window...");
+        rootLogger.log(Level.DEBUG, "Running GUI window...");
         while (true) {
             try {
                 Thread.sleep(1000/60);

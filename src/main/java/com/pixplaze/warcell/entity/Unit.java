@@ -3,7 +3,6 @@ package com.pixplaze.warcell.entity;
 import com.pixplaze.warcell.entity.behaviour.*;
 import com.pixplaze.warcell.util.ResourceManager;
 import com.pixplaze.warcell.world.FacingType;
-import com.pixplaze.warcell.world.Map;
 import com.pixplaze.warcell.world.Position;
 import com.pixplaze.warcell.world.World;
 
