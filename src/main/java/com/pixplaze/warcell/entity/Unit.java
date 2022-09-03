@@ -13,6 +13,7 @@ import java.util.Queue;
 public class Unit extends Entity implements IProgrammable, IMovable {
 
     private final Queue<IUnitCommand> commandQueue = new LinkedList<>();
+    private static final BufferedImage defaulTexture = ResourceManager.getInstance().loadTexture("/entities/unit.jpg");
 
     public Unit() {
         super("Unit");
@@ -81,7 +82,7 @@ public class Unit extends Entity implements IProgrammable, IMovable {
 
     @Override
     public BufferedImage getDefaultTexture() {
-        return ResourceManager.getInstance().loadTexture("/entities/unit.jpg");
+        return defaulTexture;
     }
 
     @Override

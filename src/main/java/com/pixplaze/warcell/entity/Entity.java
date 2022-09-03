@@ -14,6 +14,8 @@ public class Entity {
     private World world;
     private BufferedImage texture;
 
+    private static final BufferedImage defaultTexture = ResourceManager.getInstance().loadTexture("/entities/unit.jpg");
+
     public Entity() {
         name = "Entity";
         position = new Position();
@@ -59,8 +61,7 @@ public class Entity {
     }
 
     public BufferedImage getDefaultTexture() {
-        String path = "/entities/unit.jpg";
-        return ResourceManager.getInstance().loadTexture(path);
+        return defaultTexture;
     }
 
     @Override

@@ -6,12 +6,15 @@ import com.pixplaze.warcell.util.ResourceManager;
 import java.awt.image.BufferedImage;
 
 public class Wall extends Entity {
+
+    private static final BufferedImage defaultTexture = ResourceManager.getInstance().loadTexture("/entities/wall.jpg");
+
     public Wall() {
         super("Wall");
     }
 
     @Override
     public BufferedImage getDefaultTexture() {
-        return ResourceManager.getInstance().loadTexture("/entities/wall.jpg");
+        return defaultTexture;
     }
 }
