@@ -7,7 +7,7 @@ import com.pixplaze.warcell.world.World;
 import java.awt.image.BufferedImage;
 import java.util.Objects;
 
-public class Entity {
+public abstract class Entity {
 
     private String name;
     private Position position;

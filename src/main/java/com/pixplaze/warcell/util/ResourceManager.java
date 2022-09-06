@@ -11,6 +11,10 @@ import java.io.IOException;
 
 public class ResourceManager {
 
+    /**
+     * Responsible for loading and using game media resources
+     */
+
     private static ResourceManager instance;
 
     private final String absolutePath = new File("").getAbsolutePath();

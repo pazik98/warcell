@@ -1,6 +1,6 @@
 package com.pixplaze.warcell.entity.behaviour;
 
-public class MoveCommand<T extends IMovable> implements IUnitCommand {
+public class MoveCommand<T extends Movable> implements UnitCommand {
 
     private final T executor;
 

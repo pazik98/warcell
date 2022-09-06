@@ -1,7 +1,7 @@
 package com.pixplaze.warcell.world;
 
 import com.pixplaze.warcell.entity.Unit;
-import com.pixplaze.warcell.entity.behaviour.IProgrammable;
+import com.pixplaze.warcell.entity.behaviour.Programmable;
 import com.pixplaze.warcell.entity.types.Empty;
 import com.pixplaze.warcell.entity.Entity;
 import com.pixplaze.warcell.entity.types.Wall;
@@ -79,8 +79,8 @@ public class World {
 
     public void updateObjects() {
         for (Entity entity : objects) {
-            if (entity instanceof IProgrammable) {
-                ((IProgrammable) entity).executeActualCommand();
+            if (entity instanceof Programmable) {
+                ((Programmable) entity).executeActualCommand();
             }
         }
     }

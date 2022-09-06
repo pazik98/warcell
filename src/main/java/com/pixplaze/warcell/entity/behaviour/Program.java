@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Program {
-    private List<IUnitCommand> commands = new ArrayList<>();
+    private List<UnitCommand> commands = new ArrayList<>();
 
     public Program() {
         //this.commands.add();
