@@ -20,7 +20,7 @@ public class Storage implements Inventory {
                 addToSlot(item, i);
             }
         }
-        
+
         if (item.getCount() > 0 && !isFull()) {
             items[findItemType(ItemType.EMPTY)] = item;
         }
@@ -60,6 +60,9 @@ public class Storage implements Inventory {
 
     @Override
     public boolean hasItem(ItemStack item) {
+        for (ItemStack itemStack : items) {
+            // Check method
+        }
         return false;
     }
 
