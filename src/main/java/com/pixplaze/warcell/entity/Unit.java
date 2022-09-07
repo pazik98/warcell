@@ -10,13 +10,18 @@ import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Unit extends Entity implements Programmable, Movable {
+public abstract class Unit extends Entity implements Programmable, Movable {
 
     private final Queue<UnitCommand> commandQueue = new LinkedList<>();
     private static final BufferedImage defaultTexture = ResourceManager.getInstance().loadTexture("/entities/unit.jpg");
 
     public Unit() {
         super("Unit");
+        initCommands();
+    }
+
+    public Unit(String name) {
+        super(name);
         initCommands();
     }
 

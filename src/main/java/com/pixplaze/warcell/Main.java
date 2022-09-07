@@ -1,6 +1,7 @@
 package com.pixplaze.warcell;
 
 import com.pixplaze.warcell.entity.Unit;
+import com.pixplaze.warcell.entity.types.Miner;
 import com.pixplaze.warcell.entity.types.Wall;
 import com.pixplaze.warcell.gui.ClientWindow;
 import com.pixplaze.warcell.world.FacingType;
@@ -17,10 +18,10 @@ public class Main {
         world.spawnEntity(2, 3, new Wall());
         world.spawnEntity(4, 3, new Wall());
 
-        world.spawnEntity(9, 9, new Unit());
-        world.spawnEntity(0, 0, new Unit());
-        world.spawnEntity(4, 9, new Unit());
-        world.spawnEntity(0, 9, new Unit());
+        world.spawnEntity(9, 9, new Miner());
+        world.spawnEntity(0, 0, new Miner());
+        world.spawnEntity(4, 9, new Miner());
+        world.spawnEntity(0, 9, new Miner());
 
         clientWindow.initGamePanel(world);
 
