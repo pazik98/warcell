@@ -16,17 +16,11 @@ public class Main {
 
         world.spawnEntity(2, 3, new Wall());
         world.spawnEntity(4, 3, new Wall());
-        Unit unit = new Unit();
-        world.spawnEntity(1, 1, unit);
-        world.spawnEntity(2, 2, unit);
 
-        Unit unit2 = new Unit();
-        world.spawnEntity(1, 1, unit2);
-        world.spawnEntity(5, 5, unit2);
-
-        Unit unit3 = new Unit();
-        world.spawnEntity(9, 9, unit3);
-        unit3.getPosition().setFacing(FacingType.EAST);
+        world.spawnEntity(9, 9, new Unit());
+        world.spawnEntity(0, 0, new Unit());
+        world.spawnEntity(4, 9, new Unit());
+        world.spawnEntity(0, 9, new Unit());
 
         clientWindow.initGamePanel(world);
 

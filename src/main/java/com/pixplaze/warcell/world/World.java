@@ -1,10 +1,12 @@
 package com.pixplaze.warcell.world;
 
+import com.pixplaze.warcell.control.Commander;
 import com.pixplaze.warcell.entity.Unit;
 import com.pixplaze.warcell.entity.behaviour.Programmable;
 import com.pixplaze.warcell.entity.types.Empty;
 import com.pixplaze.warcell.entity.Entity;
 import com.pixplaze.warcell.entity.types.Wall;
+import com.pixplaze.warcell.server.Server;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,6 +15,7 @@ import java.util.List;
 
 public class World {
 
+    private Server server;
     private Map map;
     private List<Entity> objects;
 
@@ -21,6 +24,7 @@ public class World {
     public World(int sizeX, int sizeY) {
         this.map = new Map(sizeX, sizeY);
         this.objects = new ArrayList<>();
+        this.server = Server.getInstance();
         clearMap();
     }
 
@@ -30,7 +34,7 @@ public class World {
             return;
         }
 
-        if (objects.contains(entity)) {
+        if (entity.getWorld() != null && objects.contains(entity)) {
             rootLogger.warn("Entity already spawned at this world!");
             return;
         }
@@ -38,8 +42,14 @@ public class World {
         map.setEntityAtCell(x, y, entity);
         objects.add(entity);
         entity.setWorld(this);
+        entity.setOwner(server);
         entity.getPosition().setX(x);
         entity.getPosition().setY(y);
+    }
+
+    public void spawnEntity(int x, int y, Entity entity, Commander owner) {
+        spawnEntity(x, y, entity);
+        entity.setOwner(owner);
     }
 
     public Entity getEntity(int x, int y) {
