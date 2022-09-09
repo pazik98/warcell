@@ -55,35 +55,59 @@ public class Storage implements Inventory {
 
     @Override
     public boolean remove(ItemStack item) {
-        return false;
+        if (!hasItem(item)) {
+            return false;
+        }
+        for (ItemStack itemStack : items) {
+            if (itemStack.getItemType().equals(item.getItemType())) {
+                if (itemStack.getCount() > item.getCount()) {
+                    itemStack.setCount(itemStack.getCount() - item.getCount());
+                } else if (itemStack.getCount() == item.getCount()) {
+                    item = new ItemStack();
+                }
+            }
+        }
+        return true;
     }
 
     @Override
     public boolean hasItem(ItemStack item) {
         for (ItemStack itemStack : items) {
-            // Check method
+            if (itemStack.getItemType().equals(item.getItemType()) && itemStack.getCount() >= item.getCount()) {
+                return true;
+            }
         }
         return false;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        for (ItemStack item : items) {
+            if (!item.getItemType().equals(ItemType.EMPTY)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
     public boolean isFull() {
-        return false;
+        for (ItemStack item : items) {
+            if (item.getItemType().equals(ItemType.EMPTY) || item.getCount() < item.getMaxStack()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
     public String getName() {
-        return null;
+        return name;
     }
 
     @Override
     public int getSize() {
-        return 0;
+        return items.length;
     }
 
     private int findItemType(ItemType itemType) {
