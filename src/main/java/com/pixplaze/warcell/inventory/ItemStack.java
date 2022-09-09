@@ -10,6 +10,11 @@ public class ItemStack {
 
     public ItemStack() {}
 
+    public ItemStack(int count, ItemType itemType) {
+        this.count = count;
+        this.itemType = itemType;
+    }
+
     public ItemStack(String name, int count, ItemType itemType) {
         this.name = name;
         this.count = count;
