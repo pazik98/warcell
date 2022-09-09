@@ -75,6 +75,12 @@ public class MapPanel extends JPanel {
         return getTileSize();
     }
 
+    public Entity getEntityAt(int pixelX, int pixelY) {
+        int tileX = Math.round((pixelX - xCenter) / zoom / getTileSize());
+        int tileY = -Math.round((pixelY - yCenter) / zoom / getTileSize());
+        return world.getEntity(tileX, tileY);
+    }
+
     private void drawAtCell(Graphics2D g, int x, int y, int tileSize, BufferedImage image) {
         int xPos = Math.round(x * tileSize * zoom + xCenter);
         int yPos = Math.round(-y * tileSize * zoom + yCenter);
