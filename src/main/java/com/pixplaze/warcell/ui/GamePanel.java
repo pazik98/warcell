@@ -1,4 +1,4 @@
-package com.pixplaze.warcell.gui;
+package com.pixplaze.warcell.ui;
 
 import com.pixplaze.warcell.world.World;
 

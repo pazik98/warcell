@@ -1,8 +1,7 @@
-package com.pixplaze.warcell.gui;
+package com.pixplaze.warcell.ui;
 
 import com.pixplaze.warcell.util.ResourceManager;
 import com.pixplaze.warcell.entity.Entity;
-import com.pixplaze.warcell.entity.types.Wall;
 import com.pixplaze.warcell.world.Map;
 import com.pixplaze.warcell.world.Position;
 import com.pixplaze.warcell.world.World;

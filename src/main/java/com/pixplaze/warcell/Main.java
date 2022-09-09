@@ -1,10 +1,8 @@
 package com.pixplaze.warcell;
 
-import com.pixplaze.warcell.entity.Unit;
 import com.pixplaze.warcell.entity.types.Miner;
 import com.pixplaze.warcell.entity.types.Wall;
-import com.pixplaze.warcell.gui.ClientWindow;
-import com.pixplaze.warcell.world.FacingType;
+import com.pixplaze.warcell.ui.ClientWindow;
 import com.pixplaze.warcell.world.Simulation;
 import com.pixplaze.warcell.world.World;
 
