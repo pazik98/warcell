@@ -27,7 +27,7 @@ public class MapPanel extends JPanel {
 
     public MapPanel(World world) {
         this.world = world;
-        setBackground(Color.BLACK);
+        setBackground(Color.DARK_GRAY);
         setPreferredSize(new Dimension(400, 400));
     }
 

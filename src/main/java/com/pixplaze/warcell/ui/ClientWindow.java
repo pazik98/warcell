@@ -25,10 +25,10 @@ public class ClientWindow extends JFrame {
     public void initGamePanel(World world) {
         GamePanel mainPanel = new GamePanel(800, 600);
         MapPanel mapPanel = new MapPanel(world);
-        UnitPanel unitPanel = new UnitPanel(400);
+        EntityPanel entityPanel = new EntityPanel(400);
         addKeyListener(new KeyboardListener(mapPanel));
         mainPanel.add(mapPanel);
-        mainPanel.add(unitPanel, BorderLayout.EAST);
+        mainPanel.add(entityPanel, BorderLayout.EAST);
         add(mainPanel);
         pack();
     }
@@ -37,7 +37,7 @@ public class ClientWindow extends JFrame {
         rootLogger.log(Level.DEBUG, "Running GUI window...");
         while (true) {
             try {
-                Thread.sleep(1000/60);
+                Thread.sleep(1000/5);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
