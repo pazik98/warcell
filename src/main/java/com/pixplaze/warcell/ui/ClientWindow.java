@@ -27,7 +27,7 @@ public class ClientWindow extends JFrame {
         MapPanel mapPanel = new MapPanel(world);
         EntityPanel entityPanel = new EntityPanel(400);
         addKeyListener(new KeyboardListener(mapPanel));
-        addMouseListener(new SessionMouseListener(mapPanel));
+        addMouseListener(new SessionMouseListener(mapPanel, entityPanel));
         mainPanel.add(mapPanel);
         mainPanel.add(entityPanel, BorderLayout.EAST);
         add(mainPanel);

@@ -53,7 +53,6 @@ public class World {
     }
 
     public Entity getEntity(int x, int y) {
-        rootLogger.debug("Entity at cell [" + x + ", " + y + "] is " + map.getEntityAtCell(x, y));
         return map.getEntityAtCell(x, y);
     }
 

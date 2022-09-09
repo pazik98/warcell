@@ -11,15 +11,16 @@ public class SessionMouseListener implements MouseListener {
 
     private Logger rootLogger = LogManager.getRootLogger();
     private MapPanel mapPanel;
+    private EntityPanel entityPanel;
 
-    public SessionMouseListener(MapPanel mapPanel) {
+    public SessionMouseListener(MapPanel mapPanel, EntityPanel entityPanel) {
         this.mapPanel = mapPanel;
+        this.entityPanel = entityPanel;
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        rootLogger.debug("Mouse clicked!");
-        rootLogger.debug(mapPanel.getEntityAt(e.getX(), e.getY()));
+        entityPanel.setEntity(mapPanel.getEntityAt(e.getX(), e.getY()));
     }
 
     @Override

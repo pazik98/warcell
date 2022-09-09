@@ -5,6 +5,8 @@ import com.pixplaze.warcell.entity.Entity;
 import com.pixplaze.warcell.world.Map;
 import com.pixplaze.warcell.world.Position;
 import com.pixplaze.warcell.world.World;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.imgscalr.Scalr;
 
 import javax.swing.*;
@@ -14,9 +16,8 @@ import java.awt.image.BufferedImage;
 public class MapPanel extends JPanel {
 
     private static final ResourceManager resourceManager = ResourceManager.getInstance();
-
+    private static final Logger rootLogger = LogManager.getRootLogger();
     private static BufferedImage emptyCellImage = resourceManager.loadTexture("dirt.jpg");
-
     private static final int DEFAULT_TILE_SIZE = 20;
 
     private float zoom = 1.0f;
@@ -76,9 +77,17 @@ public class MapPanel extends JPanel {
     }
 
     public Entity getEntityAt(int pixelX, int pixelY) {
-        int tileX = Math.round((pixelX - xCenter) / zoom / getTileSize());
-        int tileY = -Math.round((pixelY - yCenter) / zoom / getTileSize());
-        return world.getEntity(tileX, tileY);
+        int tileX = Math.round((pixelX - xCenter) / zoom / getTileSize() - 1);
+        int tileY = -Math.round((pixelY - yCenter) / zoom / getTileSize() - 2);
+
+        if (tileX < 0 || tileX >= getWorld().getMap().getSizeX() ||
+                tileY < 0 || tileY >= getWorld().getMap().getSizeY()) {
+            return null;
+        }
+
+        Entity entity = world.getEntity(tileX, tileY);
+        rootLogger.debug("Entity " + entity.getName() + " at " + tileX + ", " + tileY);
+        return entity;
     }
 
     private void drawAtCell(Graphics2D g, int x, int y, int tileSize, BufferedImage image) {

@@ -15,6 +15,10 @@ public class EntityPanel extends JPanel {
         setDoubleBuffered(true);
     }
 
+    public void setEntity(Entity entity) {
+        this.entity = entity;
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -24,8 +28,14 @@ public class EntityPanel extends JPanel {
 
     private void drawInfo(Graphics2D g2d) {
         g2d.setColor(Color.WHITE);
-        drawTitle(g2d, "UnitName", 20);
-        drawParam(g2d, "position: x, y", 40);
+
+        if (entity == null) {
+            drawTitle(g2d, "No selected entity", 20);
+            return;
+        }
+
+        drawTitle(g2d, entity.getName(), 20);
+        drawParam(g2d, "position: " + entity.getPosition().getX() + " " + entity.getPosition().getY(), 40);
     }
 
     private void drawTitle(Graphics2D g2d, String text, int height) {
