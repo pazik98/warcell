@@ -30,6 +30,12 @@ public abstract class Entity {
         setTexture(getDefaultTexture());
     }
 
+    public Entity(String name, int x, int y) {
+        this.name = name;
+        position = new Position(x, y);
+        setTexture(getDefaultTexture());
+    }
+
     public String getName() {
         return name;
     }

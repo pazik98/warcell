@@ -23,6 +23,8 @@ public class Map {
     }
 
     public void setEntityAtCell(int x, int y, Entity entity) {
+        entity.getPosition().setX(x);
+        entity.getPosition().setY(y);
         cells[x][y] = entity;
     }
 
