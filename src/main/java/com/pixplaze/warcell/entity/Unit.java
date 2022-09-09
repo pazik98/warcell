@@ -10,13 +10,18 @@ import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Unit extends Entity implements IProgrammable, IMovable {
+public abstract class Unit extends Entity implements Programmable, Movable {
 
-    private final Queue<IUnitCommand> commandQueue = new LinkedList<>();
-    private static final BufferedImage defaulTexture = ResourceManager.getInstance().loadTexture("/entities/unit.jpg");
+    private final Queue<UnitCommand> commandQueue = new LinkedList<>();
+    private static final BufferedImage defaultTexture = ResourceManager.getInstance().loadTexture("/entities/unit.jpg");
 
     public Unit() {
         super("Unit");
+        initCommands();
+    }
+
+    public Unit(String name) {
+        super(name);
         initCommands();
     }
 
@@ -82,12 +87,12 @@ public class Unit extends Entity implements IProgrammable, IMovable {
 
     @Override
     public BufferedImage getDefaultTexture() {
-        return defaulTexture;
+        return defaultTexture;
     }
 
     @Override
     public void executeActualCommand() {
-        IUnitCommand command = commandQueue.poll();
+        UnitCommand command = commandQueue.poll();
         assert command != null;
         command.execute();
         commandQueue.add(command);

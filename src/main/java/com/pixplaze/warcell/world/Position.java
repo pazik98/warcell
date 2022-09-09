@@ -4,6 +4,10 @@ import java.util.Objects;
 
 public class Position {
 
+    /**
+     * The class is responsible for storing and changing the position of the object in the game world
+     */
+
     private int x;
     private int y;
     private FacingType facing;

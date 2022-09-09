@@ -1,6 +1,6 @@
 package com.pixplaze.warcell.entity.behaviour;
 
-public class TurnRightCommand<T extends IMovable> implements IUnitCommand {
+public class TurnRightCommand<T extends Movable> implements UnitCommand {
 
     private final T executor;
 

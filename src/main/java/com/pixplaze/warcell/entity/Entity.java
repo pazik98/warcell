@@ -1,5 +1,6 @@
 package com.pixplaze.warcell.entity;
 
+import com.pixplaze.warcell.control.Commander;
 import com.pixplaze.warcell.util.ResourceManager;
 import com.pixplaze.warcell.world.Position;
 import com.pixplaze.warcell.world.World;
@@ -7,12 +8,13 @@ import com.pixplaze.warcell.world.World;
 import java.awt.image.BufferedImage;
 import java.util.Objects;
 
-public class Entity {
+public abstract class Entity {
 
     private String name;
     private Position position;
     private World world;
     private BufferedImage texture;
+    private Commander owner;
 
     private static final BufferedImage defaultTexture = ResourceManager.getInstance().loadTexture("/entities/unit.jpg");
 
@@ -25,6 +27,12 @@ public class Entity {
     public Entity(String name) {
         this.name = name;
         position = new Position();
+        setTexture(getDefaultTexture());
+    }
+
+    public Entity(String name, int x, int y) {
+        this.name = name;
+        position = new Position(x, y);
         setTexture(getDefaultTexture());
     }
 
@@ -62,6 +70,14 @@ public class Entity {
 
     public BufferedImage getDefaultTexture() {
         return defaultTexture;
+    }
+
+    public Commander getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Commander owner) {
+        this.owner = owner;
     }
 
     @Override
