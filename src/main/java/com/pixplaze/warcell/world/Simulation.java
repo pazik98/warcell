@@ -7,7 +7,7 @@ public class Simulation {
 
     private int step = 0;
     private final World world;
-    private int latency = 1000/2;
+    private int latency = 1000;
 
     public Simulation(World world) {
         this.world = world;
