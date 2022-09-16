@@ -1,5 +1,6 @@
 package com.pixplaze.warcell.util;
 
+import com.pixplaze.warcell.inventory.ItemType;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -38,5 +39,14 @@ public class ResourceManager {
             e.printStackTrace();
         }
         return image;
+    }
+
+    public BufferedImage getItemTexture(ItemType itemType) {
+        switch (itemType) {
+            case STONE -> {
+                return loadTexture("items/stone.png");
+            }
+        }
+        return null;
     }
 }
