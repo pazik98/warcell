@@ -68,7 +68,7 @@ public class EntityPanel extends JPanel {
     }
 
     private void drawInventory(Graphics2D g2d, Storage storage, int height) {
-        int cellSize = 64;
+        int cellSize = 32;
 
         for (int i = 0; i < storage.getSize(); i++) {
             g2d.drawImage(Scalr.resize(EMPTY_CELL, cellSize, cellSize), null, i * cellSize, height);
@@ -76,6 +76,8 @@ public class EntityPanel extends JPanel {
             if (!type.equals(ItemType.EMPTY)) {
                 g2d.drawImage(Scalr.resize(ResourceManager.getInstance().getItemTexture(type), cellSize, cellSize),
                         null, i * cellSize, height);
+                g2d.setBackground(Color.BLACK);
+                g2d.drawString("x" + storage.getItem(i).getCount(), i * cellSize, height + cellSize);
             }
         }
     }
