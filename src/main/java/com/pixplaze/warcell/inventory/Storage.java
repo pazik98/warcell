@@ -7,8 +7,8 @@ public class Storage implements Inventory {
 
     public Storage(int size, String name) {
         items = new ItemStack[size];
-        for (ItemStack item : items) {
-            item = new ItemStack();
+        for (int i = 0; i < size; i++) {
+            items[i] = new ItemStack();
         }
         this.name = name;
     }

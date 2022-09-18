@@ -8,7 +8,8 @@ public class ItemStack {
     private boolean stackable = true;
     private ItemType itemType = ItemType.EMPTY;
 
-    public ItemStack() {}
+    public ItemStack() {
+    }
 
     public ItemStack(int count, ItemType itemType) {
         this.count = count;
