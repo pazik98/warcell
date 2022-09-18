@@ -30,7 +30,7 @@ public class World {
 
     public void spawnEntity(int x, int y, Entity entity) {
         if (!isEmpty(x, y)) {
-            rootLogger.warn("Cannot spawn entity at [" + x + ", " + y);
+            rootLogger.warn("Cannot spawn entity at [" + x + ", " + y + "]");
             return;
         }
 

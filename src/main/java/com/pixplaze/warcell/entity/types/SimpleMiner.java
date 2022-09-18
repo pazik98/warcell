@@ -1,13 +1,14 @@
 package com.pixplaze.warcell.entity.types;
 
 import com.pixplaze.warcell.entity.Unit;
+import com.pixplaze.warcell.entity.behaviour.Inventoriable;
 import com.pixplaze.warcell.entity.behaviour.Mineable;
 import com.pixplaze.warcell.entity.behaviour.Miner;
 import com.pixplaze.warcell.inventory.Inventory;
 import com.pixplaze.warcell.inventory.ItemStack;
 import com.pixplaze.warcell.inventory.Storage;
 
-public class SimpleMiner extends Unit implements Miner {
+public class SimpleMiner extends Unit implements Miner, Inventoriable {
 
     private final Storage storage = new Storage(1, "SimpleMiner's storage");
     private int mineCount = 10;

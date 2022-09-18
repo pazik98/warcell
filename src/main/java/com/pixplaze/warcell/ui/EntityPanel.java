@@ -1,6 +1,7 @@
 package com.pixplaze.warcell.ui;
 
 import com.pixplaze.warcell.entity.Entity;
+import com.pixplaze.warcell.entity.behaviour.Inventoriable;
 import com.pixplaze.warcell.entity.behaviour.Miner;
 import com.pixplaze.warcell.inventory.ItemStack;
 import com.pixplaze.warcell.inventory.ItemType;
@@ -46,7 +47,7 @@ public class EntityPanel extends JPanel {
         drawParam(g2d, "position: " + entity.getPosition().getX() + " " + entity.getPosition().getY(), 40);
         if (entity instanceof Miner) {
             drawTitle(g2d, "Inventory", 60);
-            drawInventory(g2d, (Storage) ((Miner) entity).getInventory(), 70);
+            drawInventory(g2d, (Storage) ((Inventoriable) entity).getInventory(), 70);
         }
 
     }
