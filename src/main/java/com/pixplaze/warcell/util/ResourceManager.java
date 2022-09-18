@@ -9,6 +9,8 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ResourceManager {
 
@@ -19,7 +21,18 @@ public class ResourceManager {
     private static ResourceManager instance;
 
     private final String absolutePath = new File("").getAbsolutePath();
-    static final Logger rootLogger = LogManager.getRootLogger();
+    private static final Logger rootLogger = LogManager.getRootLogger();
+    private final Map<String, BufferedImage> textureMap = new HashMap<>();
+
+
+    public ResourceManager() {
+        textureMap.put("default", loadTexture("default.png"));
+        textureMap.put("entity.empty-tile", loadTexture("entities/empty_tile.png"));
+        textureMap.put("entity.default-unit", loadTexture("entities/default_unit.png"));
+        textureMap.put("entity.wall", loadTexture("entities/wall.png"));
+        textureMap.put("item.empty-cell", loadTexture("items/empty_cell.png"));
+        textureMap.put("item.stone", loadTexture("items/stone.png"));
+    }
 
     public static ResourceManager getInstance() {
         if (instance == null) {
@@ -41,10 +54,17 @@ public class ResourceManager {
         return image;
     }
 
+    public BufferedImage getTexture(String name) {
+        if (!textureMap.containsKey(name)) {
+            return textureMap.get("default");
+        }
+        return textureMap.get(name);
+    }
+
     public BufferedImage getItemTexture(ItemType itemType) {
         switch (itemType) {
             case STONE -> {
-                return loadTexture("items/stone.png");
+                return getTexture("item.stone");
             }
         }
         return null;

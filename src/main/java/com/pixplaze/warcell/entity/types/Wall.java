@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 
 public class Wall extends Entity {
 
-    private static final BufferedImage defaultTexture = ResourceManager.getInstance().loadTexture("/entities/wall.jpg");
+    private static final ResourceManager resourceManager = ResourceManager.getInstance();
 
     public Wall() {
         super("Wall");
@@ -15,6 +15,6 @@ public class Wall extends Entity {
 
     @Override
     public BufferedImage getDefaultTexture() {
-        return defaultTexture;
+        return resourceManager.getTexture("entity.wall");
     }
 }

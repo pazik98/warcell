@@ -16,7 +16,7 @@ import java.awt.image.BufferedImage;
 public class EntityPanel extends JPanel {
 
     private Entity entity;
-    private final BufferedImage EMPTY_CELL = ResourceManager.getInstance().loadTexture("empty_cell.png");
+    private final ResourceManager resourceManager = ResourceManager.getInstance();
 
     public EntityPanel(int width) {
         setPreferredSize(new Dimension(width, 600));
@@ -72,10 +72,10 @@ public class EntityPanel extends JPanel {
         int cellSize = 32;
 
         for (int i = 0; i < storage.getSize(); i++) {
-            g2d.drawImage(Scalr.resize(EMPTY_CELL, cellSize, cellSize), null, i * cellSize, height);
+            g2d.drawImage(Scalr.resize(resourceManager.getTexture("item.empty-cell"), cellSize, cellSize), null, i * cellSize, height);
             ItemType type = storage.getItem(i).getItemType();
             if (!type.equals(ItemType.EMPTY)) {
-                g2d.drawImage(Scalr.resize(ResourceManager.getInstance().getItemTexture(type), cellSize, cellSize),
+                g2d.drawImage(Scalr.resize(resourceManager.getItemTexture(type), cellSize, cellSize),
                         null, i * cellSize, height);
                 g2d.setBackground(Color.BLACK);
                 g2d.drawString("x" + storage.getItem(i).getCount(), i * cellSize, height + cellSize);

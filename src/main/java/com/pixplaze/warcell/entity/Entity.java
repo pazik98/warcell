@@ -16,7 +16,7 @@ public abstract class Entity {
     private BufferedImage texture;
     private Commander owner;
 
-    private static final BufferedImage defaultTexture = ResourceManager.getInstance().loadTexture("/entities/unit.jpg");
+    private static final ResourceManager resourceManager = ResourceManager.getInstance();
 
     public Entity() {
         name = "Entity";
@@ -69,7 +69,7 @@ public abstract class Entity {
     }
 
     public BufferedImage getDefaultTexture() {
-        return defaultTexture;
+        return resourceManager.getTexture("default");
     }
 
     public Commander getOwner() {

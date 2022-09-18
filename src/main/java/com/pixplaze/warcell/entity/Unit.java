@@ -13,7 +13,7 @@ import java.util.Queue;
 public abstract class Unit extends Entity implements Programmable, Movable {
 
     private final Queue<UnitCommand> commandQueue = new LinkedList<>();
-    private static final BufferedImage defaultTexture = ResourceManager.getInstance().loadTexture("/entities/unit.jpg");
+    private static final ResourceManager resourceManager = ResourceManager.getInstance();
 
     public Unit() {
         super("Unit");
@@ -87,7 +87,7 @@ public abstract class Unit extends Entity implements Programmable, Movable {
 
     @Override
     public BufferedImage getDefaultTexture() {
-        return defaultTexture;
+        return resourceManager.getTexture("entity.default-unit");
     }
 
     @Override

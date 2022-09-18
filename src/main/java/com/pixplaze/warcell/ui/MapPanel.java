@@ -17,7 +17,6 @@ public class MapPanel extends JPanel {
 
     private static final ResourceManager resourceManager = ResourceManager.getInstance();
     private static final Logger rootLogger = LogManager.getRootLogger();
-    private static BufferedImage emptyCellImage = resourceManager.loadTexture("dirt.jpg");
     private static final int DEFAULT_TILE_SIZE = 20;
 
     private float zoom = 1.0f;
@@ -99,7 +98,7 @@ public class MapPanel extends JPanel {
     private void drawField(Graphics2D g) {
         Map map = world.getMap();
         int tileSize = getTileSize();
-        BufferedImage fieldTile = Scalr.resize(emptyCellImage, tileSize);
+        BufferedImage fieldTile = Scalr.resize(resourceManager.getTexture("entity.empty-tile"), tileSize);
 
         for (int x = 0; x < map.getSizeX(); x++) {
             for (int y = 0; y < map.getSizeY(); y++) {
