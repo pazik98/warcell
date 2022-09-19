@@ -1,4 +1,6 @@
-package com.pixplaze.warcell.entity.behaviour;
+package com.pixplaze.warcell.entity.behaviour.command;
+
+import com.pixplaze.warcell.entity.behaviour.Movable;
 
 public class MoveCommand<T extends Movable> implements UnitCommand {
 

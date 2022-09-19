@@ -1,4 +1,4 @@
-package com.pixplaze.warcell.entity.behaviour;
+package com.pixplaze.warcell.entity.behaviour.command;
 
 public interface UnitCommand {
 

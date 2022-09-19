@@ -1,5 +1,7 @@
 package com.pixplaze.warcell.entity.behaviour;
 
+import com.pixplaze.warcell.entity.Entity;
+
 public interface Movable {
 
     /**
@@ -11,4 +13,6 @@ public interface Movable {
     public void turnLeft();
 
     public void turnRight();
+
+    public Entity checkFront();
 }

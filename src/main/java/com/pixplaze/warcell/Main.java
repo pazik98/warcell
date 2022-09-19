@@ -1,5 +1,6 @@
 package com.pixplaze.warcell;
 
+import com.pixplaze.warcell.entity.types.BigStone;
 import com.pixplaze.warcell.entity.types.SimpleMiner;
 import com.pixplaze.warcell.entity.types.Wall;
 import com.pixplaze.warcell.inventory.ItemStack;
@@ -15,19 +16,22 @@ public class Main {
         World world = new World(20, 20);
         Simulation simulation = new Simulation(world);
 
+        for (int i = 0; i < 20; i++) {
+            world.spawnEntity(0, i, new Wall());
+        }
+
         world.spawnEntity(2, 3, new Wall());
         world.spawnEntity(4, 3, new Wall());
         world.spawnEntity(6, 6, new Wall());
         world.spawnEntity(7, 7, new Wall());
 
 
-
-        //world.spawnEntity(9, 9, new SimpleMiner());
-        //world.spawnEntity(0, 0, new SimpleMiner());
-        //world.spawnEntity(4, 9, new SimpleMiner());
         SimpleMiner miner = new SimpleMiner();
         miner.getInventory().add(new ItemStack(20, ItemType.STONE));
-        world.spawnEntity(0, 9, miner);
+        world.spawnEntity(1, 9, miner);
+        world.spawnEntity(1, 10, new BigStone());
+        world.spawnEntity(1, 8, new BigStone());
+        world.spawnEntity(2, 9, new BigStone());
 
         clientWindow.initGamePanel(world);
 

@@ -1,6 +1,10 @@
 package com.pixplaze.warcell.entity;
 
 import com.pixplaze.warcell.entity.behaviour.*;
+import com.pixplaze.warcell.entity.behaviour.command.MoveCommand;
+import com.pixplaze.warcell.entity.behaviour.command.TurnLeftCommand;
+import com.pixplaze.warcell.entity.behaviour.command.TurnRightCommand;
+import com.pixplaze.warcell.entity.behaviour.command.UnitCommand;
 import com.pixplaze.warcell.util.ResourceManager;
 import com.pixplaze.warcell.world.FacingType;
 import com.pixplaze.warcell.world.Position;
@@ -83,6 +87,31 @@ public abstract class Unit extends Entity implements Programmable, Movable {
             case SOUTH -> p.setFacing(FacingType.WEST);
             case WEST -> p.setFacing(FacingType.NORTH);
         }
+    }
+
+    public Entity checkFront() {
+        switch (getPosition().getFacing()) {
+            case NORTH -> {
+                return getEntityRelatively(0, 1);
+            }
+            case EAST -> {
+                return getEntityRelatively(1, 0);
+            }
+            case SOUTH -> {
+                return getEntityRelatively(0, -1);
+            }
+            case WEST -> {
+                return getEntityRelatively(-1, 0);
+            }
+        }
+        return null;
+    }
+
+    private Entity getEntityRelatively(int x, int y) {
+        int xCoord = getPosition().getX() + x;
+        int yCoord = getPosition().getY() + y;
+
+        return getWorld().getEntity(xCoord, yCoord);
     }
 
     @Override

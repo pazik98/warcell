@@ -1,5 +1,6 @@
 package com.pixplaze.warcell.entity.types;
 
+import com.pixplaze.warcell.entity.Entity;
 import com.pixplaze.warcell.entity.Unit;
 import com.pixplaze.warcell.entity.behaviour.Inventoriable;
 import com.pixplaze.warcell.entity.behaviour.Mineable;
@@ -18,10 +19,14 @@ public class SimpleMiner extends Unit implements Miner, Inventoriable {
     }
 
     @Override
-    public void mine(Mineable resource) {
-        if (!getInventory().isFull()) {
-            ItemStack item = resource.gain(mineCount);
-            getInventory().add(item);
+    public void mine() {
+        Entity entity = checkFront();
+        if (entity instanceof Mineable) {
+            Mineable resource = (Mineable) entity;
+            if (!getInventory().isFull()) {
+                ItemStack item = resource.gain(mineCount);
+                getInventory().add(item);
+            }
         }
     }
 

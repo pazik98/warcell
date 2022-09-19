@@ -4,5 +4,5 @@ import com.pixplaze.warcell.inventory.Inventory;
 
 public interface Miner {
 
-    void mine(Mineable resource);
+    void mine();
 }
