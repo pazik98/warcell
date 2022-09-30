@@ -123,14 +123,15 @@ public abstract class Unit extends Entity implements Programmable, Movable {
     public void executeActualCommand() {
         UnitCommand command = commandQueue.poll();
         assert command != null;
-        command.execute();
+        command.execute(this);
         commandQueue.add(command);
     }
 
     public void initCommands() {
-        MoveCommand<Unit> moveCommand = new MoveCommand<>(this);
-        TurnLeftCommand<Unit> turnLeftCommand = new TurnLeftCommand<>(this);
-        TurnRightCommand<Unit> turnRightCommand = new TurnRightCommand<>(this);
+        TurnRightCommand turnRightCommand = new TurnRightCommand();
+        TurnLeftCommand turnLeftCommand = new TurnLeftCommand();
+        MoveCommand moveCommand = new MoveCommand();
+
         commandQueue.add(turnRightCommand);
         commandQueue.add(moveCommand);
         commandQueue.add(moveCommand);
