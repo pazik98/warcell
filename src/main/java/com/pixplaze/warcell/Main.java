@@ -1,5 +1,6 @@
 package com.pixplaze.warcell;
 
+import com.pixplaze.warcell.entity.behaviour.command.CommandResult;
 import com.pixplaze.warcell.entity.types.BigStone;
 import com.pixplaze.warcell.entity.types.SimpleMiner;
 import com.pixplaze.warcell.entity.types.Wall;

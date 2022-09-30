@@ -8,5 +8,5 @@ public interface UnitCommand {
      * Responsible for generalizing all entity management commands
      */
 
-    void execute(Object o);
+    CommandResult execute(Object o);
 }

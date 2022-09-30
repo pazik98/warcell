@@ -5,9 +5,10 @@ import com.pixplaze.warcell.entity.behaviour.Movable;
 public class MoveCommand implements UnitCommand {
 
     @Override
-    public void execute(Object o) {
+    public CommandResult execute(Object o) {
         if (o instanceof Movable) {
             ((Movable) o).move();
         }
+        return null;
     }
 }
