@@ -5,9 +5,15 @@ import com.pixplaze.warcell.entity.Unit;
 import com.pixplaze.warcell.entity.behaviour.Inventoriable;
 import com.pixplaze.warcell.entity.behaviour.Mineable;
 import com.pixplaze.warcell.entity.behaviour.Miner;
+import com.pixplaze.warcell.entity.behaviour.command.CommandManager;
+import com.pixplaze.warcell.entity.behaviour.command.UnitCommand;
 import com.pixplaze.warcell.inventory.Inventory;
 import com.pixplaze.warcell.inventory.ItemStack;
 import com.pixplaze.warcell.inventory.Storage;
+import org.apache.logging.log4j.Level;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SimpleMiner extends Unit implements Miner, Inventoriable {
 
@@ -16,6 +22,11 @@ public class SimpleMiner extends Unit implements Miner, Inventoriable {
 
     public SimpleMiner() {
         super("SimpleMiner");
+
+        List<UnitCommand> loopList = new ArrayList<>();
+        loopList.add(CommandManager.getInstance().get("Turn Right"));
+        loopList.add(CommandManager.getInstance().get("Mine"));
+        getProgramHandler().setLoopList(loopList);
     }
 
     @Override

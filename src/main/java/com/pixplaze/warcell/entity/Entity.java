@@ -4,6 +4,8 @@ import com.pixplaze.warcell.control.Commander;
 import com.pixplaze.warcell.util.ResourceManager;
 import com.pixplaze.warcell.world.Position;
 import com.pixplaze.warcell.world.World;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.awt.image.BufferedImage;
 import java.util.Objects;
@@ -17,6 +19,7 @@ public abstract class Entity {
     private Commander owner;
 
     private static final ResourceManager resourceManager = ResourceManager.getInstance();
+    protected final Logger rootLogger = LogManager.getRootLogger();
 
     public Entity() {
         name = "Entity";

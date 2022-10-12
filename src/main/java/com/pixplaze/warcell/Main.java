@@ -1,6 +1,6 @@
 package com.pixplaze.warcell;
 
-import com.pixplaze.warcell.entity.behaviour.command.CommandResult;
+import com.pixplaze.warcell.entity.behaviour.command.*;
 import com.pixplaze.warcell.entity.types.BigStone;
 import com.pixplaze.warcell.entity.types.SimpleMiner;
 import com.pixplaze.warcell.entity.types.Wall;
@@ -12,6 +12,11 @@ import com.pixplaze.warcell.world.World;
 
 public class Main {
     public static void main(String[] args) {
+        CommandManager.getInstance().register("Move", new MoveCommand());
+        CommandManager.getInstance().register("Turn Right", new TurnRightCommand());
+        CommandManager.getInstance().register("Turn Left", new TurnLeftCommand());
+        CommandManager.getInstance().register("Mine", new MineCommand());
+
         ClientWindow clientWindow = new ClientWindow();
 
         World world = new World(20, 20);

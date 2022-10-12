@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Program {
+    private String name = "Program";
     private String codeText = "";
 
     public Program() {
@@ -19,11 +20,5 @@ public class Program {
 
     public void setCodeText(String codeText) {
         this.codeText = codeText;
-    }
-
-    public List<UnitCommand> compileStart() {
-        List<UnitCommand> commands = new ArrayList<>();
-        //commands.add();
-        return commands;
     }
 }

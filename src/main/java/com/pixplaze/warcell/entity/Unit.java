@@ -5,6 +5,8 @@ import com.pixplaze.warcell.entity.behaviour.command.MoveCommand;
 import com.pixplaze.warcell.entity.behaviour.command.TurnLeftCommand;
 import com.pixplaze.warcell.entity.behaviour.command.TurnRightCommand;
 import com.pixplaze.warcell.entity.behaviour.command.UnitCommand;
+import com.pixplaze.warcell.entity.behaviour.program.Program;
+import com.pixplaze.warcell.entity.behaviour.program.ProgramHandler;
 import com.pixplaze.warcell.util.ResourceManager;
 import com.pixplaze.warcell.world.FacingType;
 import com.pixplaze.warcell.world.Position;
@@ -16,17 +18,15 @@ import java.util.Queue;
 
 public abstract class Unit extends Entity implements Programmable, Movable {
 
-    private final Queue<UnitCommand> commandQueue = new LinkedList<>();
     private static final ResourceManager resourceManager = ResourceManager.getInstance();
+    private final ProgramHandler programHandler = new ProgramHandler();
 
     public Unit() {
         super("Unit");
-        initCommands();
     }
 
     public Unit(String name) {
         super(name);
-        initCommands();
     }
 
     public void move() {
@@ -121,26 +121,10 @@ public abstract class Unit extends Entity implements Programmable, Movable {
 
     @Override
     public void executeActualCommand() {
-        UnitCommand command = commandQueue.poll();
-        assert command != null;
-        command.execute(this);
-        commandQueue.add(command);
+        programHandler.getNextCommand().execute(this);
     }
 
-    public void initCommands() {
-        TurnRightCommand turnRightCommand = new TurnRightCommand();
-        TurnLeftCommand turnLeftCommand = new TurnLeftCommand();
-        MoveCommand moveCommand = new MoveCommand();
-
-        commandQueue.add(turnRightCommand);
-        commandQueue.add(moveCommand);
-        commandQueue.add(moveCommand);
-        commandQueue.add(moveCommand);
-        commandQueue.add(turnLeftCommand);
-        commandQueue.add(moveCommand);
-        commandQueue.add(moveCommand);
-        commandQueue.add(turnLeftCommand);
-        commandQueue.add(moveCommand);
-        commandQueue.add(moveCommand);
+    public ProgramHandler getProgramHandler() {
+        return programHandler;
     }
 }
