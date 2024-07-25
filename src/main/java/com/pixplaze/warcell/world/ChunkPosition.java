@@ -8,7 +8,7 @@ import com.pixplaze.warcell.exception.OutOfMaxChunkPositionValue;
  */
 public class ChunkPosition {
 
-    public final int MAX_CHUNK_POSITION_VALUE = 32 * 1024;
+    public final int MAX_CHUNK_POSITION_VALUE = 16 * 1024;
 
     private final int x;
     private final int y;
@@ -48,11 +48,11 @@ public class ChunkPosition {
     }
 
     private void checkChunkPositionValues(int x, int y) throws OutOfMaxChunkPositionValue {
-        if (x > MAX_CHUNK_POSITION_VALUE) {
+        if (Math.abs(x) > MAX_CHUNK_POSITION_VALUE) {
             throw new OutOfMaxChunkPositionValue("Chunk position X is too big! It can't be more than " +
                     MAX_CHUNK_POSITION_VALUE);
         }
-        if (y > MAX_CHUNK_POSITION_VALUE) {
+        if (Math.abs(y) > MAX_CHUNK_POSITION_VALUE) {
             throw new OutOfMaxChunkPositionValue("Chunk position Y is too big! It can't be more than " +
                     MAX_CHUNK_POSITION_VALUE);
         }
