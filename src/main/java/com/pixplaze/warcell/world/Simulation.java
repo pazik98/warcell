@@ -1,9 +1,7 @@
 package com.pixplaze.warcell.world;
 
 public class Simulation {
-    /**
-    * The class is responsible for step by step simulation of the world
-    */
+    /*
 
     private int step = 0;
     private final World world;
@@ -39,4 +37,5 @@ public class Simulation {
     public World getWorld() {
         return world;
     }
+    */
 }

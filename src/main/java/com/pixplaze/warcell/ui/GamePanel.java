@@ -24,6 +24,6 @@ public class GamePanel extends JPanel {
     }
 
     public void initMapPanel(World world) {
-        add(new MapPanel(world));
+        //add(new MapPanel(world));
     }
 }

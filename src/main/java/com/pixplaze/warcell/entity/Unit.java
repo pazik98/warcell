@@ -30,6 +30,7 @@ public abstract class Unit extends Entity implements Programmable, Movable {
         FacingType facing = p.getFacing();
         World w = getWorld();
 
+        /*
         switch (facing) {
             case NORTH:
                 if (w.isEmpty(p.getX(), p.getY() + 1)) {
@@ -59,6 +60,7 @@ public abstract class Unit extends Entity implements Programmable, Movable {
                     w.getMap().setEntityAtCell(p.getX(), p.getY(), this);
                 }
         }
+         */
     }
 
     public void turnLeft() {

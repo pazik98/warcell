@@ -2,7 +2,6 @@ package com.pixplaze.warcell.ui;
 
 import com.pixplaze.warcell.util.ResourceManager;
 import com.pixplaze.warcell.entity.Entity;
-import com.pixplaze.warcell.world.Map;
 import com.pixplaze.warcell.world.Position;
 import com.pixplaze.warcell.world.World;
 import org.apache.logging.log4j.LogManager;
@@ -14,6 +13,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class MapPanel extends JPanel {
+    /*
 
     private static final ResourceManager resourceManager = ResourceManager.getInstance();
     private static final Logger rootLogger = LogManager.getRootLogger();
@@ -80,6 +80,7 @@ public class MapPanel extends JPanel {
         int tileX = Math.round((pixelX - xCenter) / zoom / getTileSize() - 1);
         int tileY = -Math.round((pixelY - yCenter) / zoom / getTileSize() - 2);
 
+
         if (tileX < 0 || tileX >= getWorld().getMap().getSizeX() ||
                 tileY < 0 || tileY >= getWorld().getMap().getSizeY()) {
             return null;
@@ -129,4 +130,6 @@ public class MapPanel extends JPanel {
         drawField(g2);
         drawEntities(g2);
     }
+
+     */
 }

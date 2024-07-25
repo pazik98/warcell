@@ -23,6 +23,7 @@ public class KeyboardListener implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        /*
         int offset = mapPanel.getMoveOffset();
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
@@ -42,6 +43,8 @@ public class KeyboardListener implements KeyListener {
                 rootLogger.log(Level.DEBUG, "Left key pressed");
                 break;
         }
+
+         */
     }
 
     @Override

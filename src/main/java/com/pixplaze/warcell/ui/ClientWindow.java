@@ -23,6 +23,7 @@ public class ClientWindow extends JFrame {
     }
 
     public void initGamePanel(World world) {
+        /*
         GamePanel mainPanel = new GamePanel(800, 600);
         MapPanel mapPanel = new MapPanel(world);
         EntityPanel entityPanel = new EntityPanel(400);
@@ -32,6 +33,8 @@ public class ClientWindow extends JFrame {
         mainPanel.add(entityPanel, BorderLayout.EAST);
         add(mainPanel);
         pack();
+
+         */
     }
 
     public void start() {
