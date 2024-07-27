@@ -2,6 +2,8 @@ package com.pixplaze.warcell;
 
 import com.pixplaze.warcell.entity.types.Miner;
 import com.pixplaze.warcell.entity.types.Wall;
+import com.pixplaze.warcell.server.Server;
+import com.pixplaze.warcell.server.ServerSettings;
 import com.pixplaze.warcell.ui.ClientWindow;
 import com.pixplaze.warcell.world.ChunkPosition;
 import com.pixplaze.warcell.world.Simulation;
@@ -9,12 +11,9 @@ import com.pixplaze.warcell.world.World;
 
 public class Main {
     public static void main(String[] args) {
-        var cp1 = new ChunkPosition(5, 5);
-        var cp2 = new ChunkPosition(5, 5);
-
-        if (cp1.equals(cp2)) {
-            System.out.println("equals!!");
-        }
+        World world = new World(new Server(new ServerSettings()), "world-1");
+        world.getChunk(new ChunkPosition(1, 1, world));
+        world.save();
 
         /*
         ClientWindow clientWindow = new ClientWindow();

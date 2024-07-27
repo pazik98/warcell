@@ -12,8 +12,9 @@ public class ChunkPosition {
 
     private final int x;
     private final int y;
+    private final World world;
 
-    public ChunkPosition(int x, int y) {
+    public ChunkPosition(int x, int y, World world) {
         try {
             checkChunkPositionValues(x, y);
         }
@@ -23,6 +24,7 @@ public class ChunkPosition {
 
         this.x = x;
         this.y = y;
+        this.world = world;
     }
 
     public int getX() {
@@ -31,6 +33,10 @@ public class ChunkPosition {
 
     public int getY() {
         return y;
+    }
+
+    public World getWorld() {
+        return world;
     }
 
     @Override

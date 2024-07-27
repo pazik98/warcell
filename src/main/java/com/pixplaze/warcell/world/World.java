@@ -10,44 +10,40 @@ import com.pixplaze.warcell.server.Server;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
-/**
- * The class is responsible for storing and processing chunks and entities.
- */
 public class World {
 
     private Server server;
-    private final HashMap<ChunkPosition, Chunk> chunks;
+    private ChunkManager chunkManager;
+    private String name;
 
-    public World(Server server)
+
+    public World(Server server, String name)
     {
         this.server = server;
-        this.chunks = new HashMap<>();
+        this.chunkManager = new ChunkManager(this);
+        this.name = name;
     }
 
-    /**
-     * @return the clone of chunk by (x, y).
-     */
-    public Chunk getChunk(int x, int y)
-    {
-        var chunkPosition = new ChunkPosition(x, y);
-        return getChunk(chunkPosition);
+    public String getName() {
+        return name;
     }
 
-    /**
-     * @return the clone of chunk by ChunkPosition.
-     */
-    protected Chunk getChunk(ChunkPosition chunkPosition)
-    {
+    public IChunk getChunk(ChunkPosition chunkPosition) {
         try {
-            return chunks.get(chunkPosition).clone();
+            return chunkManager.getChunk(chunkPosition.getX(), chunkPosition.getY()).clone();
         } catch (CloneNotSupportedException e) {
             e.printStackTrace(System.out);
-            return null;
         }
+        return null;
+    }
+
+    public void save() {
+        chunkManager.saveAllChunks();
+    }
+
+    public Random getRandom() {
+        return server.getRandom();
     }
 }
