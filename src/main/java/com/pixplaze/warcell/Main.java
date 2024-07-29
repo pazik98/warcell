@@ -6,14 +6,31 @@ import com.pixplaze.warcell.server.Server;
 import com.pixplaze.warcell.server.ServerSettings;
 import com.pixplaze.warcell.ui.ClientWindow;
 import com.pixplaze.warcell.world.ChunkPosition;
+import com.pixplaze.warcell.world.IChunk;
 import com.pixplaze.warcell.world.Simulation;
 import com.pixplaze.warcell.world.World;
 
 public class Main {
+
+    private static void printChunk(IChunk chunk) {
+        for (int i = 0; i < IChunk.CHUNK_SIZE; i++) {
+            String line = "";
+            for (int j = 0; j < IChunk.CHUNK_SIZE; j++) {
+                line += chunk.getCell(i, j).getCellType().toString() + " ";
+            }
+            System.out.println(line);
+        }
+    }
     public static void main(String[] args) {
         World world = new World(new Server(new ServerSettings()), "world-1");
-        world.getChunk(new ChunkPosition(1, 1, world));
-        world.save();
+        IChunk chunk = world.getChunk(new ChunkPosition(1, 1, world));
+        world.unloadChunk(chunk);
+        IChunk chunk2 = world.getChunk(chunk.getChunkPosition());
+        printChunk(chunk);
+        System.out.println();
+        printChunk(chunk2);
+
+
 
         /*
         ClientWindow clientWindow = new ClientWindow();

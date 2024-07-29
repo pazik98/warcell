@@ -3,6 +3,7 @@ package com.pixplaze.warcell.world;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 /**
  * The class is responsible for storing and processing chunks.
@@ -51,6 +52,7 @@ public class ChunkManager implements IChunkManager {
     @Override
     public void unloadChunk(IChunk chunk) {
         saveChunk(chunk);
+        chunks.remove(chunk.getChunkPosition());
     }
 
     protected void saveChunk(IChunk chunk) {
@@ -68,10 +70,14 @@ public class ChunkManager implements IChunkManager {
 
         if (loadedChunk != null) return loadedChunk;
         else {
-            IChunk generatedChunk = chunkGenerator.generate(chunkPosition, world.getRandom());
+            IChunk generatedChunk = generateChunk(chunkPosition);
             chunks.put(chunkPosition, generatedChunk);
             return generatedChunk;
         }
 
+    }
+
+    protected IChunk generateChunk(ChunkPosition chunkPosition) {
+        return chunkGenerator.generate(chunkPosition, world.getRandom());
     }
 }

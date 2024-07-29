@@ -22,10 +22,11 @@ public class ChunkSaver implements IChunkSaver {
     }
 
     public void writeChunk(String path, IChunk chunk) {
-        try (FileOutputStream fileOutputStream = new FileOutputStream(path, true)) {
+        try (FileOutputStream fileOutputStream = new FileOutputStream(path, false)) {
             for (int i = 0; i < IChunk.CHUNK_SIZE; i++) {
                 for (int j = 0; j < IChunk.CHUNK_SIZE; j++) {
-                    byte[] buffer = chunk.getCell(i, j).getCellType().toString().getBytes();
+                    Integer cellType = chunk.getCell(i, j).getCellType().ordinal();
+                    byte buffer = cellType.byteValue();
                     fileOutputStream.write(buffer);
                 }
             }

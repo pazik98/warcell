@@ -43,6 +43,11 @@ public class World {
         chunkManager.saveAllChunks();
     }
 
+    // TEMPORARY
+    public void unloadChunk(IChunk chunk) {
+        chunkManager.unloadChunk(chunk);
+    }
+
     public Random getRandom() {
         return server.getRandom();
     }
