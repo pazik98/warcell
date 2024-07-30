@@ -1,5 +1,7 @@
 package com.pixplaze.warcell.world;
 
+import com.pixplaze.warcell.util.Path;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -9,7 +11,9 @@ public class ChunkSaver implements IChunkSaver {
 
     @Override
     public void save(IChunk chunk) {
-        String path = "src\\main\\resources\\save\\" + chunk.getChunkPosition().getWorld().getName() + "\\chunks";
+        String saveDirectory = chunk.getChunkPosition().getWorld().getServer().getServerSettings().getSavePath();
+        String worldName = chunk.getChunkPosition().getWorld().getName();
+        String path = saveDirectory + "\\" + worldName + "\\chunks";
 
         File directory = new File(path);
         if (!directory.exists()) {

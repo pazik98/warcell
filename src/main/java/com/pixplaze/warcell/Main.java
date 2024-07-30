@@ -2,6 +2,7 @@ package com.pixplaze.warcell;
 
 import com.pixplaze.warcell.entity.types.Miner;
 import com.pixplaze.warcell.entity.types.Wall;
+import com.pixplaze.warcell.server.GameSettings;
 import com.pixplaze.warcell.server.Server;
 import com.pixplaze.warcell.server.ServerSettings;
 import com.pixplaze.warcell.ui.ClientWindow;
@@ -22,13 +23,15 @@ public class Main {
         }
     }
     public static void main(String[] args) {
-        World world = new World(new Server(new ServerSettings()), "world-1");
+        Server server = new Server();
+        World world = server.getWorld();
+        System.out.println(server.getSeed());
         IChunk chunk = world.getChunk(new ChunkPosition(1, 1, world));
         world.unloadChunk(chunk);
-        IChunk chunk2 = world.getChunk(chunk.getChunkPosition());
-        printChunk(chunk);
-        System.out.println();
-        printChunk(chunk2);
+//        IChunk chunk2 = world.getChunk(chunk.getChunkPosition());
+//        printChunk(chunk);
+//        System.out.println();
+//        printChunk(chunk2);
 
 
 

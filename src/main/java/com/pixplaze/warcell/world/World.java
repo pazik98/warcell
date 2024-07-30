@@ -1,11 +1,5 @@
 package com.pixplaze.warcell.world;
 
-import com.pixplaze.warcell.control.Commander;
-import com.pixplaze.warcell.entity.Unit;
-import com.pixplaze.warcell.entity.behaviour.Programmable;
-import com.pixplaze.warcell.entity.types.Empty;
-import com.pixplaze.warcell.entity.Entity;
-import com.pixplaze.warcell.entity.types.Wall;
 import com.pixplaze.warcell.server.Server;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,6 +9,7 @@ import java.util.*;
 public class World {
 
     private Server server;
+    private Random random;
     private ChunkManager chunkManager;
     private String name;
 
@@ -22,8 +17,13 @@ public class World {
     public World(Server server, String name)
     {
         this.server = server;
+        this.random = new Random(server.getSeed());
         this.chunkManager = new ChunkManager(this);
         this.name = name;
+    }
+
+    public Server getServer() {
+        return server;
     }
 
     public String getName() {
@@ -49,6 +49,6 @@ public class World {
     }
 
     public Random getRandom() {
-        return server.getRandom();
+        return random;
     }
 }

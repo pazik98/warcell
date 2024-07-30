@@ -8,7 +8,9 @@ public class ChunkLoader implements IChunkLoader {
 
     @Override
     public IChunk load(ChunkPosition chunkPosition) {
-        String path = "src\\main\\resources\\save\\" + chunkPosition.getWorld().getName() + "\\chunks";
+        String saveDirectory = chunkPosition.getWorld().getServer().getServerSettings().getSavePath();
+        String worldName = chunkPosition.getWorld().getName();
+        String path = saveDirectory + "\\" + worldName + "\\chunks";
         String filename = chunkPosition.getX() + "-" + chunkPosition.getY() + ".wcc";
         return readChunk(path + "\\" + filename, chunkPosition);
     }

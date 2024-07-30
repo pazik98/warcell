@@ -1,43 +1,39 @@
 package com.pixplaze.warcell.server;
 
 import com.pixplaze.warcell.control.Commander;
+import com.pixplaze.warcell.util.ConfigManager;
+import com.pixplaze.warcell.world.World;
 
 import java.util.Random;
 
-public class Server implements Commander {
+public class Server {
 
-    private static Server instance;
-    private Session session;
-    private final ServerSettings serverSettings;
+    private final ConfigManager configManager;
 
-    private Random random;
+    private final World world;
 
-    public Server(ServerSettings serverSettings) {
-        this.serverSettings = serverSettings;
-        this.random = new Random(10101);
+    public Server() {
+        this.configManager = new ConfigManager();
+        this.world = createWorld();
     }
 
-    public static Server getInstance() {
-        if (instance == null) {
-            instance = new Server(new ServerSettings());
-        }
-        return instance;
+    public ServerSettings getServerSettings() {
+        return configManager.getServerSettings();
     }
 
-    public Session getSession() {
-        return session;
+    public GameSettings getGameSettings() {
+        return configManager.getGameSettings();
     }
 
-    public void setSession(Session session) {
-        this.session = session;
+    public long getSeed() {
+        return configManager.getGameSettings().getSeed();
     }
 
-    @Override
-    public String getName() {
-        return "Server";
+    private World createWorld() {
+        return new World(this, "world-1");
     }
 
-    public Random getRandom() {
-        return random;
+    public World getWorld() {
+        return world;
     }
 }
